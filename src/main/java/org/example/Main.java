@@ -14,14 +14,11 @@ public class Main {
         WebDriver driver = new ChromeDriver();
         driver.get("https://6pm.com");
         UsedWebElements elements = new UsedWebElements(driver);
-        Actions actions = new Actions(driver);
+
         WebElement bugs = driver.findElement(elements.bugs);
-        bugs.click();
         WebElement luggage = driver.findElement(elements.luggage);
-        Thread.sleep(15000);
         NavBar navbar=new NavBar(driver);
         navbar.openCategory(bugs,luggage);
-        Thread.sleep(10000);
         WebElement production = driver.findElement(elements.production);
         List<WebElement> products = production.findElements(elements.products);
         GetText getText = new GetText();

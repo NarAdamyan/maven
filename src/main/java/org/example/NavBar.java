@@ -14,9 +14,9 @@ public class NavBar {
         this.elements = new UsedWebElements(driver);
     }
     public void openCategory(WebElement button, WebElement category) throws InterruptedException {
-        button.click();
+        actions.moveToElement(button).perform();
         Thread.sleep(500);
         category.click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
     }
 }
