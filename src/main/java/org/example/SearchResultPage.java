@@ -15,7 +15,7 @@ public class SearchResultPage extends BasePage {
     private final By searchInput = By.xpath("//input[@placeholder='Enter keywords...']");
     private final By enterSearchButton = By.xpath("//div[text()='Search']");
     private final By companiesResult = By.xpath(".//img[@alt='company-logo']/following-sibling::div/div[1]");
-    private final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
+    public final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
     private final By hiringLoc = By.xpath("//div[text()='Hiring']");
 
     public static int randomCompany;

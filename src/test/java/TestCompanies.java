@@ -12,6 +12,8 @@ import java.util.List;
 public class TestCompanies extends TestClass {
     @Test
     public void testHomework()throws InterruptedException {
+        driver.get("https://staff.am/en");
+
         // Step 1: Go to Companies from header, filter by Sport
         headerFooter.getNavbarTab(Tabs.Companies)
                 .selectFilterIndustry(Tabs.Filter_Sport);

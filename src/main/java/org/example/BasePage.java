@@ -7,7 +7,8 @@ import java.time.Duration;
 
 abstract class BasePage {
     protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriverWait wait;
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;

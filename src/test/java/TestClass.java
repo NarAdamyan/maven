@@ -20,7 +20,6 @@ public class TestClass {
         homePage = new HomePage(driver);
         headerFooter=new HeaderFooter(driver);
         searchResultPage=new SearchResultPage(driver);
-        driver.get("https://staff.am/en");
     }
 
     @AfterEach
