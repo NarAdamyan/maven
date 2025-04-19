@@ -1,6 +1,7 @@
 package org.example;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -8,10 +9,11 @@ import java.time.Duration;
 abstract class BasePage {
     protected WebDriver driver;
     public WebDriverWait wait;
+    public Actions actions;
 
-
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
+    public BasePage() {
+        this.driver = WebDriverManager.getInstance().getDriver(); // ✅ Correctly get WebDriver
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.actions = new Actions(driver);
     }
 }

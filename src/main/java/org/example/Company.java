@@ -10,12 +10,10 @@ public class Company extends BasePage {
     private final By industryLoc = By.xpath("//div[text() ='Industry']/following-sibling::div");
     String name;
 
-    public Company(WebDriver driver) {
-        super(driver);
+    public Company() {
     }
 
-    public Company(WebDriver driver, String name) {
-        super(driver);
+    public Company(String name) {
         this.name = name;
     }
 

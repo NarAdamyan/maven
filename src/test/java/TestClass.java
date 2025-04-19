@@ -1,7 +1,4 @@
-import org.example.WebDriverManager;
-import org.example.HeaderFooter;
-import org.example.HomePage;
-import org.example.SearchResultPage;
+import org.example.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -12,18 +9,22 @@ public class TestClass {
     WebDriver driver;
     SearchResultPage searchResultPage;
     HeaderFooter headerFooter;
+    Filters filters;
 
     @BeforeEach
-    public void setUp(){
-        webDriverManager = new WebDriverManager();
-        driver = webDriverManager.getDriver();
-        homePage = new HomePage(driver);
-        headerFooter=new HeaderFooter(driver);
-        searchResultPage=new SearchResultPage(driver);
+    public void setUp() {
+        webDriverManager = WebDriverManager.getInstance(); // ✅ Singleton call
+        driver = webDriverManager.getDriver();             // ✅ Get driver from it
+
+        // Pass driver to your page classes
+        homePage = new HomePage();
+        headerFooter = new HeaderFooter();
+        searchResultPage = new SearchResultPage();
+        filters = new Filters();
     }
 
     @AfterEach
-    public void tearDown(){
-        webDriverManager.quitDriver();
+    public void tearDown() {
+        webDriverManager.quitDriver(); // ✅ Properly quit the Singleton driver
     }
 }

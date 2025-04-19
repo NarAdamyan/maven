@@ -8,8 +8,7 @@ public class HomePage extends BasePage {
     private final By allIndustriesDropDown = By.xpath("//input[@class='ant-select-selection-search-input']");
     private final By informationTechnologiesOption = By.xpath("//div[text()='Information technologies']");
     private final By searchButton = By.xpath("//img[@alt='search-icon']");
-public HomePage (WebDriver driver){
-    super(driver);
+public HomePage (){
 }
     public HomePage selectRadioButtonOnTab(Tabs radioButton) {
         String radioButtonText = radioButton.getDisplayName();
@@ -36,7 +35,7 @@ public HomePage (WebDriver driver){
                 By.xpath("//input[@placeholder='Enter keywords...']")
         ));
 
-        return new SearchResultPage(driver);
+        return new SearchResultPage();
     }
 
     public String getIndustryDetail() {
