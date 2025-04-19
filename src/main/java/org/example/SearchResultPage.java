@@ -15,15 +15,15 @@ public class SearchResultPage extends BasePage {
     private final By searchInput = By.xpath("//input[@placeholder='Enter keywords...']");
     private final By enterSearchButton = By.xpath("//div[text()='Search']");
     private final By companiesResult = By.xpath(".//img[@alt='company-logo']/following-sibling::div/div[1]");
-    private final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
+    public final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
     private final By hiringLoc = By.xpath("//div[text()='Hiring']");
 
     public static int randomCompany;
     public static List<WebElement> companies;
 
 
-    public SearchResultPage(WebDriver driver){
-        super(driver);
+    public SearchResultPage(){
+
     }
 
     public SearchResultPage selectFilterIndustry(Tabs industryName) throws InterruptedException {
@@ -78,7 +78,7 @@ public class SearchResultPage extends BasePage {
         Actions actions = new Actions(driver);
         actions.click(companies.get(randomCompany)).perform();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[@role='heading']"))));
-        return new Company(driver);
+        return new Company();
     }
 
 
@@ -95,13 +95,13 @@ public class SearchResultPage extends BasePage {
 
         for (String names : companiesNames) {
             System.out.println(names);
-            companies.add(new Company(driver,names));
+            companies.add(new Company(names));
         }
         return companies;
     }
 
     public SearchResultPage clickHiringButton(){
         wait.until(ExpectedConditions.elementToBeClickable(hiringLoc)).click();
-        return new SearchResultPage(driver);
+        return new SearchResultPage();
     }
 }

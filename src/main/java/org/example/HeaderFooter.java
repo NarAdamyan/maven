@@ -13,12 +13,10 @@ public class HeaderFooter extends BasePage {
         WebElement navigBar = driver.findElement(navBar);
         wait.until(ExpectedConditions.visibilityOf(navigBar));
         navigBar.findElement(By.xpath(String.format("//div[contains(text(), '%s')]", tab))).click();
-        return new SearchResultPage(driver);
+        return new SearchResultPage();
     }
 
-    public HeaderFooter(WebDriver driver) {
-        super(driver);
-    }
+    public HeaderFooter() {}
 
     public void selectFooterCategoryViewAllCompanies() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
