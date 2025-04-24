@@ -6,7 +6,9 @@ public enum Tabs {
     Companies("Companies"),
     All_Categories("All Categories"),
     Information_Technologies("Information technologies"),
-    Filter_Sport("Sport");
+    Filter_Sport("Sport"),
+    Candidate("Candidate"),
+    Register("Register");
 
     private final String displayName;
 

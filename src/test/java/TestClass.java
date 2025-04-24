@@ -8,13 +8,14 @@ import org.openqa.selenium.WebDriver;
 public class TestClass {
     static WebDriver driver;
     static WebDriverManager webDriverManager;
-
+RegisterPage registerPage;
     HomePage homePage;
     SearchResultPage searchResultPage;
     HeaderFooter headerFooter;
     Filters filters;
 
     @BeforeAll
+
     static void globalSetup() {
         webDriverManager = WebDriverManager.getInstance();
         driver = webDriverManager.getDriver();
@@ -22,10 +23,12 @@ public class TestClass {
 
     @BeforeEach
     void setup() {
+        
         homePage = new HomePage();
         searchResultPage = new SearchResultPage();
         headerFooter = new HeaderFooter();
         filters = new Filters();
+        registerPage=new RegisterPage();
     }
 
     @AfterAll

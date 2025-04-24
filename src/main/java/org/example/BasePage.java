@@ -2,6 +2,7 @@ package org.example;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -15,5 +16,7 @@ abstract class BasePage {
         this.driver = WebDriverManager.getInstance().getDriver(); // ✅ Correctly get WebDriver
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.actions = new Actions(driver);
+        PageFactory.initElements(driver, this);
+
     }
 }

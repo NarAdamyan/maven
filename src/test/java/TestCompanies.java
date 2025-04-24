@@ -1,7 +1,7 @@
 import io.qameta.allure.Step;
 import org.example.Company;
 import org.example.Tabs;
-import org.example.utils.AllureAttachments;
+import org.example.AllureAttachments;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -39,8 +39,8 @@ public class TestCompanies extends TestClass {
 
     @Step("Step 1: Navigate to Companies tab and filter by Sport")
     void goToCompaniesAndFilterBySport() throws InterruptedException{
-        headerFooter.getNavbarTab(Tabs.Companies)
-                .selectFilterIndustry(Tabs.Filter_Sport);
+        headerFooter.getNavbarTab(Tabs.Companies);
+               searchResultPage .selectFilterIndustry(Tabs.Filter_Sport);
     }
     @Step("Step 2: Get filtered company list")
     List<Company> getFilteredCompanyList() {
