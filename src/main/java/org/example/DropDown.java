@@ -2,7 +2,6 @@ package org.example;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
@@ -41,8 +40,6 @@ public class DropDown extends BasePage {
 
         // Now scroll and select the option
         boolean optionFound = scrollAndFindOption(optionText);
-
-        // If option is not found, throw an exception
         if (!optionFound) {
             throw new RuntimeException(String.format(
                     "Option '%s' not found in dropdown '%s' after %d attempts.",

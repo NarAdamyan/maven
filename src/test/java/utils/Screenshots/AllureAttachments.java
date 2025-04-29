@@ -1,4 +1,4 @@
-package org.example;
+package utils.Screenshots;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AllureAttachments {
 
-    @Attachment(value = "Screenshot - {0}", type = "image/png")
-    public static byte[] takeScreenshot(String name, WebDriver driver) {
+    @Attachment(value = "{screenshotName}", type = "image/png")
+    public static byte[] attachScreenshot(WebDriver driver, String screenshotName) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

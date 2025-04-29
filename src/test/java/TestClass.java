@@ -2,16 +2,17 @@ import org.example.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
+
 
 public class TestClass {
     static WebDriver driver;
     static WebDriverManager webDriverManager;
-RegisterPage registerPage;
+    RegisterPage registerPage;
     HomePage homePage;
     SearchResultPage searchResultPage;
-    HeaderFooter headerFooter;
+    Header header;
+    Footer footer;
     Filters filters;
 
     @BeforeAll
@@ -23,12 +24,13 @@ RegisterPage registerPage;
 
     @BeforeEach
     void setup() {
-        
+
         homePage = new HomePage();
         searchResultPage = new SearchResultPage();
-        headerFooter = new HeaderFooter();
+        header = new Header();
+        footer=new Footer();
         filters = new Filters();
-        registerPage=new RegisterPage();
+        registerPage = new RegisterPage();
     }
 
     @AfterAll
@@ -36,6 +38,4 @@ RegisterPage registerPage;
         webDriverManager.quitDriver();
     }
 
-    @RegisterExtension
-    static TestResultLogger watcher = new TestResultLogger(driver);
 }

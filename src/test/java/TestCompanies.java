@@ -1,7 +1,6 @@
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.example.Company;
-import org.example.Tabs;
-import org.example.AllureAttachments;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -10,42 +9,44 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestCompanies extends TestClass {
-
+    @Attachment(value = "Company List", type = "text/plain")
+    public String attachCompanyList(List<Company> companies) {
+        return companies.stream()
+                .map(Company::toString)
+                .collect(Collectors.joining("\n"));
+    }
     @Test
-    public void testHomework() throws InterruptedException {
+    public void testSportIndustryFilterConsistencyAcrossNavigation() throws InterruptedException{
         driver.get("https://staff.am/en");
-
         goToCompaniesAndFilterBySport();
-
         List<Company> filteredList = getFilteredCompanyList();
-
         clickHiringFilter();
         List<Company> filteredHiredList = getFilteredCompanyList();
+        attachCompanyList(filteredList);
+        attachCompanyList(filteredHiredList);
 
         navigateToAllCompaniesFromFooter();
-
         waitForCompaniesPage();
-
         filterAgainBySport();
         List<Company> filteredList2 = getFilteredCompanyList();
-
         clickHiringFilter();
         List<Company> filteredHiredList2 = getFilteredCompanyList();
-
         compareResults(filteredList, filteredList2, filteredHiredList, filteredHiredList2);
     }
 
     @Step("Step 1: Navigate to Companies tab and filter by Sport")
-    void goToCompaniesAndFilterBySport() throws InterruptedException{
-        headerFooter.getNavbarTab(Tabs.Companies);
-               searchResultPage .selectFilterIndustry(Tabs.Filter_Sport);
+    void goToCompaniesAndFilterBySport() {
+        header.getNavbarTab("Companies");
+        filters.selectFilterSection("Filter By Industry").selectOption("Sport");
     }
+
     @Step("Step 2: Get filtered company list")
-    List<Company> getFilteredCompanyList() {
+    List<Company> getFilteredCompanyList() throws InterruptedException{
+        Thread.sleep(5000);
         List<Company> companies = searchResultPage.getCompaniesList();
-        AllureAttachments.takeScreenshot("nnnnnnn",driver); // Attach screenshot
         return companies;
     }
 
@@ -57,7 +58,7 @@ public class TestCompanies extends TestClass {
 
     @Step("Step 4: Navigate to 'View All Companies' via footer")
     void navigateToAllCompaniesFromFooter() {
-        headerFooter.selectFooterCategoryViewAllCompanies();
+        footer.selectFooterCategoryViewAllCompanies();
     }
 
     @Step("Step 4.5: Wait for Companies page to load")
@@ -67,8 +68,9 @@ public class TestCompanies extends TestClass {
     }
 
     @Step("Step 5: Filter again by Sport industry")
-    void filterAgainBySport() throws InterruptedException{
-        searchResultPage.selectFilterIndustry(Tabs.Filter_Sport);
+    void filterAgainBySport()throws  InterruptedException {
+        filters.selectFilterSection("Filter By Industry").selectOption("Sport");
+        Thread.sleep(1000);
     }
 
     @Step("Step 7: Compare both filtered lists before and after footer navigation")

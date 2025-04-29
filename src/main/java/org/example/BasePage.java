@@ -13,7 +13,7 @@ abstract class BasePage {
     public Actions actions;
 
     public BasePage() {
-        this.driver = WebDriverManager.getInstance().getDriver(); // ✅ Correctly get WebDriver
+        this.driver = WebDriverManager.getInstance().getDriver();
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.actions = new Actions(driver);
         PageFactory.initElements(driver, this);

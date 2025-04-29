@@ -63,6 +63,7 @@ public class ScreenshotOnFailureExtension implements TestWatcher {
 
         return screenshot;
     }
+
     @Override
     public void testSuccessful(ExtensionContext context) {
         logger.info("Test '{}' passed.", context.getDisplayName());

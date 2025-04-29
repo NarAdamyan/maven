@@ -9,9 +9,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.junit.jupiter.api.extension.ExtendWith; // Import ExtendWith
 
 import java.util.Map;
 import java.util.stream.Stream;
@@ -31,6 +28,7 @@ class TestFilter extends TestClass {
     @MethodSource("filterDataProvider")
     @DisplayName("Test single and double filter functionality")
     void testSingleFilterAndTwoFilters(String filterCategory1, String optionToSelect1) throws InterruptedException {
+        Allure.step("Start filters test");
         WebDriver driver = WebDriverManager.getInstance().getDriver();
         driver.get("https://www.staff.am/en/jobs");
         Filters filters = new Filters();
@@ -41,11 +39,6 @@ class TestFilter extends TestClass {
 
         logInfo("🧪 Testing with single filter → [%s]: [%s]", filterCategory1, optionToSelect1);
         assertCount(expectedSingle, actualSingle, filterCategory1, optionToSelect1);
-        // attachScreenshot(driver); // You can keep these for step-level screenshots
-
-        // Capture screenshot after applying the first filter
-        // attachScreenshot(driver);
-
         Map<String, String> filterData = Filters.getRandomOptionPerFilter(driver);
         String filterCategory2 = (String) filterData.keySet().toArray()[0];
         String optionToSelect2 = filterData.get(filterCategory2);
@@ -58,9 +51,6 @@ class TestFilter extends TestClass {
                 filterCategory1, optionToSelect1, filterCategory2, optionToSelect2);
         assertCount(expectedTwo, actualTwo, filterCategory2, optionToSelect2);
 
-        // Capture screenshot after applying the second filter
-        // attachScreenshot(driver);
-
         uncheckFilter(filters, filterCategory1, optionToSelect1);
         int countAfterUncheck = getActualCount(filters);
 
@@ -70,6 +60,7 @@ class TestFilter extends TestClass {
     }
 
     @Test
+
     @DisplayName("Deliberately Failing Test for Screenshot")
     void deliberatelyFailingTest() {
         WebDriver driver = WebDriverManager.getInstance().getDriver();
@@ -113,10 +104,4 @@ class TestFilter extends TestClass {
         System.out.printf((message) + "%n", args);
     }
 
-    @Attachment(value = "Screenshot", type = "image/png")
-    public byte[] attachScreenshot(WebDriver driver) {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
-        return screenshot;
-    }
 }
