@@ -1,5 +1,4 @@
 package ApiTests;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -7,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 public class BaseApiTests extends BaseTest {
-
     protected void validateUserCount(String path, int expectedCount) {
         given()
                 .spec(getRequestSpec(path))
@@ -17,7 +15,6 @@ public class BaseApiTests extends BaseTest {
                 .statusCode(200)
                 .body("data", hasSize(expectedCount));
     }
-
     protected void validatePerPage(String path, int perPage) {
         given()
                 .spec(getRequestSpec(path))
@@ -28,7 +25,6 @@ public class BaseApiTests extends BaseTest {
                 .statusCode(200)
                 .body("data.size()", equalTo(perPage));
     }
-
     protected void validateGender(String path, String gender) {
         given()
                 .spec(getRequestSpec(path))

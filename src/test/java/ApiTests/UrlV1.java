@@ -1,5 +1,4 @@
 package ApiTests;
-
 import org.junit.jupiter.api.Test;
 
 public class UrlV1 extends BaseApiTests {

@@ -1,8 +1,7 @@
 package ApiTests;
-
 import org.junit.jupiter.api.Test;
 
-public class UrlV0 extends BaseApiTest {
+public class UrlV0 extends BaseApiTests {
     private static final String V0_PATH = "/public-api";
 
     @Test
@@ -26,4 +25,4 @@ public class UrlV0 extends BaseApiTest {
     }
 }
 
-}
+
