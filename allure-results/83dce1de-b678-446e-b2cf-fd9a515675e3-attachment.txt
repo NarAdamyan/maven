@@ -1,0 +1,4 @@
+Expected condition failed: waiting for element to be clickable: By.xpath: div[class="ant-select-selector"]//following-sibling::span/div[text()='Year'] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.19.1', revision: 'abe0ee07dc'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
+Driver info: driver.version: unknown

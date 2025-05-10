@@ -1,0 +1,1 @@
+❌ Mismatch for [Job category] → [Accounting/Bookkeeping/Cash register]: expected 74, but got 242 ==> expected: <74> but was: <242>

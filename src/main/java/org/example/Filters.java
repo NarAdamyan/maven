@@ -50,18 +50,18 @@ public class Filters extends BasePage {
     }
 
     private void openViewMoreIfAvailable() {
-        driver.findElements(By.xpath("//button[contains(text(),'View more')]")).stream()
+        driver.findElements(By.xpath("//div[@tabindex]/div[text()= 'View more']")).stream()
                 .findFirst()
                 .ifPresent(button -> {
                     actions.moveToElement(button).click().perform();
-                    wait.until(ExpectedConditions.invisibilityOf(button));
+//                    wait.until(ExpectedConditions.invisibilityOf(button));
                 });
     }
 
     public WebElement selectOption(String optionToSelect) {
         String oldUrl = driver.getCurrentUrl(); // store current URL
-        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath(String.format("//span[text()='%s']", optionToSelect))
+
+        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format("//span[text()='%s']", optionToSelect))
         ));
         actions.moveToElement(option).click().perform();
 

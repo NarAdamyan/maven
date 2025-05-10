@@ -1,0 +1,4 @@
+Expected condition failed: waiting for element to be clickable: [[ChromeDriver: chrome on windows (d831332872e17e0c52cb3a6794239a42)] -> xpath: //div[normalize-space()='2025']] (tried for 10 second(s) with 500 milliseconds interval)
+Build info: version: '4.19.1', revision: 'abe0ee07dc'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
+Driver info: driver.version: unknown

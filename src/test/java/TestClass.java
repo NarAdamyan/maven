@@ -1,30 +1,41 @@
 import org.example.*;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 
+
 public class TestClass {
-    WebDriverManager webDriverManager;
+    static WebDriver driver;
+    static WebDriverManager webDriverManager;
+    RegisterPage registerPage;
     HomePage homePage;
-    WebDriver driver;
     SearchResultPage searchResultPage;
-    HeaderFooter headerFooter;
+    Header header;
+    Footer footer;
     Filters filters;
 
+    @BeforeAll
+
+    static void globalSetup() {
+        webDriverManager = WebDriverManager.getInstance();
+        driver = webDriverManager.getDriver();
+    }
+
     @BeforeEach
-    public void setUp() {
-        webDriverManager = WebDriverManager.getInstance(); // ✅ Singleton call
-        driver = webDriverManager.getDriver();             // ✅ Get driver from it
+    void setup() {
 
-        // Pass driver to your page classes
         homePage = new HomePage();
-        headerFooter = new HeaderFooter();
         searchResultPage = new SearchResultPage();
+        header = new Header();
+        footer=new Footer();
         filters = new Filters();
+        registerPage = new RegisterPage();
     }
 
-    @AfterEach
-    public void tearDown() {
-        webDriverManager.quitDriver(); // ✅ Properly quit the Singleton driver
+    @AfterAll
+    static void tearDown() {
+        webDriverManager.quitDriver();
     }
+
 }
