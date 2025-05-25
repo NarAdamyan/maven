@@ -1,0 +1,9 @@
+no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=135.0.7049.96)
+Build info: version: '4.19.1', revision: 'abe0ee07dc'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [027cf90b61aaab946d6c71249bf83130, get {url=https://www.staff.am/en/jobs}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 135.0.7049.96, chrome: {chromedriverVersion: 135.0.7049.97 (b41307079c9b..., userDataDir: C:\Users\Narine\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50721}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50721/devtoo..., se:cdpVersion: 135.0.7049.96, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 027cf90b61aaab946d6c71249bf83130

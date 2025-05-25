@@ -1,0 +1,1 @@
+Expected condition failed: waiting for presence of element located by: By.xpath: //div[contains(@class, 'ant-select-item-option') and @title='1999']//div[text()='1999'] (tried for 20 second(s) with 500 milliseconds interval)

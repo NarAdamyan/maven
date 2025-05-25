@@ -1,0 +1,1 @@
+Register button style should change ==> expected: <true> but was: <false>

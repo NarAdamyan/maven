@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"Test verifies that user can filter with valid filters","21","testValidLogin()","","Sun Apr 20 16:04:42 AMT 2025","passed","Sun Apr 20 16:04:42 AMT 2025","","AllureTest","AllureTest","testValidLogin"
+"","35809","testHomework()","","Sun Apr 20 21:00:38 AMT 2025","passed","Sun Apr 20 21:01:14 AMT 2025","","TestCompanies","TestCompanies","testHomework"
+"","22127","testCompanyAndDataValidation()","","Sun Apr 20 16:14:37 AMT 2025","broken","Sun Apr 20 16:14:59 AMT 2025","","TestCompanyAndDataValidation","TestCompanyAndDataValidation","testCompanyAndDataValidation"
+"","14670","Test single and double filter functionality [1] Specialist level, Mid level","","Sun Apr 20 21:01:16 AMT 2025","failed","Sun Apr 20 21:01:30 AMT 2025","","Testing","Testing","testSingleFilterAndTwoFilters"

@@ -1,0 +1,9 @@
+element not interactable
+  (Session info: chrome=135.0.7049.96)
+Build info: version: '4.19.1', revision: 'abe0ee07dc'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '22.0.2'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [8d6ab1c96db15b39e3e99a60bf11529e, clickElement {id=f.A625C70C4B12272E044ADA10D35A1C91.d.DD7AD6FFB48B06EB690A47FF933BF3DF.e.72}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 135.0.7049.96, chrome: {chromedriverVersion: 135.0.7049.95 (de2eb485a195..., userDataDir: C:\Users\Narine\AppData\Loc...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:59561}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:59561/devtoo..., se:cdpVersion: 135.0.7049.96, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[[[ChromeDriver: chrome on windows (8d6ab1c96db15b39e3e99a60bf11529e)] -> css selector: div[class="container"]]] -> xpath: //div[contains(text(), 'Register')]]
+Session ID: 8d6ab1c96db15b39e3e99a60bf11529e
