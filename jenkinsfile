@@ -1,0 +1,155 @@
+// Jenkinsfile for a Maven Project
+
+pipeline {
+    // Defines where the pipeline will run.
+    // 'any' means it can run on any available Jenkins agent.
+    // For production, you might specify a label: agent { label 'my-maven-agent' }
+    agent any
+
+    // Declare tools required for the pipeline.
+    // These tools (Maven and JDK) must be pre-configured in
+    // Jenkins -> Manage Jenkins -> Global Tool Configuration.
+    // Replace 'M3' and 'JDK11' with the actual names you gave your installations.
+    tools {
+        maven 'M3' // Name of your Maven installation in Jenkins
+        jdk 'JDK11' // Name of your JDK installation in Jenkins
+    }
+
+    // Define environment variables specific to this pipeline.
+    // This example sets MAVEN_OPTS for memory, useful for large projects.
+    environment {
+        // Can be useful for large Maven projects to prevent OutOfMemory errors
+        MAVEN_OPTS = '-Xmx1024m -XX:MaxPermSize=512m'
+    }
+
+    // Stages define a series of distinct steps.
+    stages {
+        stage('Checkout Source') {
+            steps {
+                echo 'Cloning source code...'
+                // Adjust the Git URL to your repository.
+                // For a private repository, you'll need to specify credentialsId:
+                // git credentialsId: 'your-github-ssh-key', url: 'git@github.com:NarAdamyan/maven.git'
+                // Or for HTTPS with username/password:
+                // git credentialsId: 'your-github-username-password', url: 'https://github.com/NarAdamyan/maven.git'
+                git 'https://github.com/NarAdamyan/maven.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building Maven project...'
+                // 'clean install' cleans the target directory, compiles, tests (if not skipped), and installs the artifact to the local Maven repo.
+                // '-DskipTests' is used here to skip tests during the initial build,
+                // as tests are run in a dedicated 'Test' stage for clearer reporting and separation.
+                sh 'mvn clean install -DskipTests'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running unit and integration tests...'
+                // 'mvn test' specifically runs unit tests.
+                // For integration tests, you might also use 'mvn verify' or 'mvn integration-test'.
+                sh 'mvn test'
+
+                // Publish JUnit test results. This is crucial for Jenkins to display
+                // test trends, failing tests, and detailed reports.
+                // Assumes Surefire (for unit tests) and Failsafe (for integration tests) generate XML reports.
+                junit '**/target/surefire-reports/*.xml, **/target/failsafe-reports/*.xml'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo 'Packaging application...'
+                // 'mvn package' packages the compiled code into a distributable format (JAR, WAR, EAR, etc.).
+                // This might be redundant if 'mvn install' already created the package,
+                // but explicitly running it ensures the package goal is met.
+                sh 'mvn package'
+
+                // Archive the generated artifacts.
+                // This makes them available for download from the Jenkins build page.
+                // 'fingerprint: true' allows tracking which builds produced which artifacts.
+                archiveArtifacts artifacts: '**/target/*.jar, **/target/*.war, **/target/*.zip', fingerprint: true
+            }
+        }
+
+        // Optional Stage: Code Quality Analysis (e.g., SonarQube)
+        // Uncomment and configure if you use SonarQube.
+        /*
+        stage('Code Analysis') {
+            steps {
+                echo 'Running SonarQube analysis...'
+                // You need to install SonarQube Scanner plugin in Jenkins
+                // and configure your SonarQube server in Manage Jenkins -> Configure System.
+                // Replace 'sonar' with the name of your SonarQube server configuration in Jenkins.
+                withSonarQubeEnv('sonar') {
+                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar'
+                }
+            }
+        }
+        */
+
+        // Optional Stage: Deployment (Example for a simple deployment to a dev environment)
+        // Adapt this to your actual deployment mechanism (e.g., Docker, Kubernetes, SSH, AWS, etc.)
+        /*
+        stage('Deploy to Dev') {
+            // Only execute this stage if the build is from the 'main' or 'master' branch
+            when {
+                branch 'main' || branch 'master'
+            }
+            steps {
+                echo 'Deploying application to Development environment...'
+                // Example: copy JAR/WAR to a remote server
+                // Requires Jenkins SSH Agent Plugin or similar for secure SSH connections.
+                // script {
+                //     def remote = [:]
+                //     remote.name = 'dev-server'
+                //     remote.host = 'your.dev.server.ip'
+                //     remote.allowAnyHosts = true
+                //     withCredentials([sshUserPrivateKey(credentialsId: 'dev-server-ssh-key', keyFileVariable: 'key')]) {
+                //         remote.user = 'jenkins'
+                //         remote.port = 22
+                //         remote.key = key
+                //         sshCommand remote: remote, command: "mkdir -p /opt/your-app"
+                //         sshPut remote: remote, from: "target/*.jar", into: "/opt/your-app"
+                //         sshCommand remote: remote, command: "sudo systemctl restart your-app"
+                //     }
+                // }
+            }
+        }
+        */
+    }
+
+    // Post-build actions: run always, on success, on failure, etc.
+    post {
+        // This block will always run regardless of the pipeline's overall status.
+        always {
+            echo 'Cleaning up workspace...'
+            // Cleans the workspace directory on the Jenkins agent.
+            // Recommended to ensure a clean slate for the next build.
+            cleanWs()
+        }
+        // This block runs if the pipeline successfully completed all stages.
+        success {
+            echo 'Pipeline finished successfully!'
+            // Add success notifications (e.g., Slack, Email)
+            // slackSend channel: '#your-channel', message: "Build ${env.BUILD_DISPLAY_NAME} succeeded for ${env.JOB_NAME}!"
+        }
+        // This block runs if any stage in the pipeline failed.
+        failure {
+            echo 'Pipeline failed!'
+            // Add failure notifications
+            // slackSend channel: '#your-channel', message: "Build ${env.BUILD_DISPLAY_NAME} failed for ${env.JOB_NAME}! Check ${env.BUILD_URL}"
+        }
+        // This block runs if the pipeline status changed from success to failure, or failure to success.
+        changed {
+            echo 'Pipeline status changed.'
+        }
+        // This block runs if the pipeline was aborted (e.g., manually cancelled).
+        aborted {
+            echo 'Pipeline was aborted.'
+        }
+    }
+}

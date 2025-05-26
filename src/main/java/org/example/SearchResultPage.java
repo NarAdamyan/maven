@@ -15,34 +15,24 @@ public class SearchResultPage extends BasePage {
     private final By searchInput = By.xpath("//input[@placeholder='Enter keywords...']");
     private final By enterSearchButton = By.xpath("//div[text()='Search']");
     private final By companiesResult = By.xpath(".//img[@alt='company-logo']/following-sibling::div/div[1]");
-    public final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
+    //    public final By viewMoreLoc = By.xpath("(//div[@tabindex]/div[text()= 'View more'])[1]");
     private final By hiringLoc = By.xpath("//div[text()='Hiring']");
 
     public static int randomCompany;
     public static List<WebElement> companies;
 
 
-    public SearchResultPage(){
+    public SearchResultPage() {
 
     }
 
-    public SearchResultPage selectFilterIndustry(Tabs industryName) throws InterruptedException {
-        Actions actions = new Actions(driver);
-        Thread.sleep(5000);
-        actions.click(driver.findElement(viewMoreLoc)).perform();
-        Thread.sleep(5000);
-
-        actions.click(driver.findElement(By.xpath(String.format("//span[text()='%s']", industryName.getDisplayName())))).perform();
-        Thread.sleep(5000);
-        return this;
-    }
-    public SearchResultPage enterKeywordInSearchField(String keyword){
+    public SearchResultPage enterKeywordInSearchField(String keyword) {
         driver.findElement(searchInput).sendKeys(keyword);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(searchInput)));
         return this;
     }
 
-    public SearchResultPage clearSearchField(){
+    public SearchResultPage clearSearchField() {
         driver.findElement(searchInput).clear();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(searchInput)));
         return this;
@@ -64,7 +54,7 @@ public class SearchResultPage extends BasePage {
 
     }
 
-    public String getRandomCompanyDetails(){
+    public String getRandomCompanyDetails() {
 
         companies = driver.findElements((companiesResult));
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(companiesResult)));
@@ -88,6 +78,7 @@ public class SearchResultPage extends BasePage {
         return detail.getText().toLowerCase();
 
     }
+
     public List<Company> getCompaniesList() {
         List<Company> companies = new ArrayList<>();
         List<String> companiesNames = getNamesOfCompany();
@@ -100,7 +91,7 @@ public class SearchResultPage extends BasePage {
         return companies;
     }
 
-    public SearchResultPage clickHiringButton(){
+    public SearchResultPage clickHiringButton() {
         wait.until(ExpectedConditions.elementToBeClickable(hiringLoc)).click();
         return new SearchResultPage();
     }

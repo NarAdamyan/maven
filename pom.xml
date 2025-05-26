@@ -70,7 +70,31 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.17.0</version> <!-- Use the latest version -->
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.27.0</version> <!-- Use the latest version -->
+        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Allure Maven plugin -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Compatible with Java 22 -->
+                <configuration>
+                    <source>22</source>
+                    <target>22</target>
+                </configuration>
+            </plugin>
 
+        </plugins>
+    </build>
 </project>
