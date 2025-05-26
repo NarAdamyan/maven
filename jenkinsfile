@@ -12,7 +12,7 @@ pipeline {
     // Replace 'M3' and 'JDK11' with the actual names you gave your installations.
     tools {
         maven 'M3' // Name of your Maven installation in Jenkins
-        jdk 'JDK11' // Name of your JDK installation in Jenkins
+        jdk 'JDK22' // Name of your JDK installation in Jenkins
     }
 
     // Define environment variables specific to this pipeline.
